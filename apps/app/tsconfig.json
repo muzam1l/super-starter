@@ -1,0 +1,18 @@
+{
+  "extends": ["@{workspace}/ts-config/next"],
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.cjs",
+    "**/*.js",
+    ".eslintrc.cjs",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": ["node_modules"]
+}

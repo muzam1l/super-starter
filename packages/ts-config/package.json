@@ -1,0 +1,12 @@
+{
+  "name": "@{workspace}/ts-config",
+  "version": "0.0.0",
+  "private": true,
+  "exports": {
+    "./*": "./src/*.json"
+  },
+  "scripts": {
+    "clean": "rm -rf .turbo node_modules"
+  },
+  "devDependencies": {}
+}

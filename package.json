@@ -1,0 +1,33 @@
+{
+  "name": "{workspace}",
+  "private": true,
+  "scripts": {
+    "prod": "bun run check && turbo prod",
+    "dev": "turbo dev",
+    "lint": "turbo lint",
+    "db:generate": "bun --cwd packages/api db:generate",
+    "db:push": "bun --cwd packages/api db:push",
+    "db:studio": "bun --cwd packages/api db:studio",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,md}\"",
+    "clean": "turbo clean && rm -rf .turbo node_modules bun.lockb && bun i",
+    "check": "bun run format && bun run lint"
+  },
+  "devDependencies": {
+    "@{workspace}/eslint-config": "*",
+    "@{workspace}/ts-config": "*",
+    "prettier": "^3.2.5",
+    "turbo": "latest",
+    "typescript": "^5.3.3"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "packageManager": "bun@1.0.35",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "trustedDependencies": [
+    "es5-ext"
+  ]
+}

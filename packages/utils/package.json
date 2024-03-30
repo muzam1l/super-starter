@@ -1,0 +1,20 @@
+{
+  "name": "@{workspace}/utils",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./*": "./src/*.ts"
+  },
+  "scripts": {
+    "lint": "eslint . --max-warnings 0",
+    "clean": "rm -rf .turbo node_modules"
+  },
+  "dependencies": {
+    "@trpc/client": "next",
+    "@trpc/server": "next",
+    "@trpc/react-query": "next",
+    "react": "18.2.0",
+    "superjson": "^2.2.1"
+  }
+}
