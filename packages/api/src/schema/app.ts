@@ -1,11 +1,5 @@
 import { sql } from 'drizzle-orm';
-import {
-  index,
-  pgTableCreator,
-  serial,
-  timestamp,
-  varchar,
-} from 'drizzle-orm/pg-core';
+import { index, pgTableCreator, serial, timestamp, varchar } from 'drizzle-orm/pg-core';
 import { tablePrefix } from '../tables';
 import { users } from './auth';
 

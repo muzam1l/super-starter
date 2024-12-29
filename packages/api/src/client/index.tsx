@@ -25,10 +25,7 @@ export const getQueryClient = () => {
   return (clientQueryClientSingleton ??= createQueryClient());
 };
 
-type Api = Pick<
-  CreateTRPCReactBase<AnyTRPCRouter, unknown>,
-  'createClient' | 'Provider'
->;
+type Api = Pick<CreateTRPCReactBase<AnyTRPCRouter, unknown>, 'createClient' | 'Provider'>;
 export const getClientProvider =
   (api: Api, path: string = '/api/trpc') =>
   (props: PropsWithChildren) => {

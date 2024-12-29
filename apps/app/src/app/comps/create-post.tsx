@@ -40,9 +40,7 @@ export function CreatePost() {
         <Button type="submit" disabled={createPost.isPending}>
           {createPost.isPending ? 'Submitting...' : 'Submit'}
         </Button>
-        {createPost.isError && (
-          <p className="text-red-500">{createPost.error.message}</p>
-        )}
+        {createPost.isError && <p className="text-red-500">{createPost.error.message}</p>}
       </form>
     </>
   );

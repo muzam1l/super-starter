@@ -2,10 +2,7 @@
  * @type {import('eslint').Linter.Config}
  */
 module.exports = {
-  extends: [
-    '@{workspace}/eslint-config/base',
-    '@{workspace}/eslint-config/react',
-  ]
+  extends: ['@{workspace}/eslint-config/base', '@{workspace}/eslint-config/react']
     .map(str => require.resolve(str))
     .concat(['plugin:@next/next/recommended']),
 

@@ -34,9 +34,7 @@ export const accounts = pgAuthTable(
     userId: varchar('userId', { length: 255 })
       .notNull()
       .references(() => users.id),
-    type: varchar('type', { length: 255 })
-      .$type<AdapterAccount['type']>()
-      .notNull(),
+    type: varchar('type', { length: 255 }).$type<AdapterAccount['type']>().notNull(),
     provider: varchar('provider', { length: 255 }).notNull(),
     providerAccountId: varchar('providerAccountId', { length: 255 }).notNull(),
     refresh_token: text('refresh_token'),
@@ -63,9 +61,7 @@ export const accountsRelations = relations(accounts, ({ one }) => ({
 export const sessions = pgAuthTable(
   'session',
   {
-    sessionToken: varchar('sessionToken', { length: 255 })
-      .notNull()
-      .primaryKey(),
+    sessionToken: varchar('sessionToken', { length: 255 }).notNull().primaryKey(),
     userId: varchar('userId', { length: 255 })
       .notNull()
       .references(() => users.id),

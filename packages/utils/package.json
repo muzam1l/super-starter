@@ -15,6 +15,6 @@
     "@trpc/server": "next",
     "@trpc/react-query": "next",
     "react": "18.2.0",
-    "superjson": "^2.2.1"
+    "superjson": "^2.2.2"
   }
 }

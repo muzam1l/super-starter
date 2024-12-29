@@ -14,22 +14,22 @@
     "dev": "bun run prod -- --watch"
   },
   "dependencies": {
-    "@radix-ui/react-slot": "^1.0.2"
+    "@radix-ui/react-slot": "^1.1.1"
   },
   "devDependencies": {
     "@{workspace}/eslint-config": "*",
     "@{workspace}/ts-config": "*",
-    "@types/node": "^20.11.24",
-    "@types/react": "^18.2.61",
-    "@types/react-dom": "^18.2.19",
-    "react": "^18.2.0",
-    "class-variance-authority": "^0.7.0",
-    "tailwind-merge": "^2.2.2",
-    "clsx": "^2.1.0",
-    "postcss": "^8.4.38",
-    "typescript": "^5.3.3",
-    "autoprefixer": "^10.4.19",
-    "tailwindcss": "^3.4.1",
+    "@types/node": "^20.17.10",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "react": "^18.3.1",
+    "class-variance-authority": "^0.7.1",
+    "tailwind-merge": "^2.6.0",
+    "clsx": "^2.1.1",
+    "postcss": "^8.4.49",
+    "typescript": "^5.7.2",
+    "autoprefixer": "^10.4.20",
+    "tailwindcss": "^3.4.17",
     "tailwindcss-animate": "^1.0.7"
   }
 }

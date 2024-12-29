@@ -33,10 +33,7 @@ async function AuthShowcase() {
       <p>{session && <span>Logged in as {session.user?.name}</span>}</p>
 
       <Button variant="destructive">
-        <Link
-          className="block"
-          href={session ? '/api/auth/signout' : '/api/auth/signin'}
-        >
+        <Link className="block" href={session ? '/api/auth/signout' : '/api/auth/signin'}>
           {session ? 'Sign out' : 'Sign in'}
         </Link>
       </Button>
@@ -65,11 +62,7 @@ async function CrudShowcase() {
     <>
       <p>Secret: {secret}</p>
 
-      {latestPost ? (
-        <p>Most recent post: {latestPost.name}</p>
-      ) : (
-        <p>No posts yet.</p>
-      )}
+      {latestPost ? <p>Most recent post: {latestPost.name}</p> : <p>No posts yet.</p>}
 
       <CreatePost />
     </>
