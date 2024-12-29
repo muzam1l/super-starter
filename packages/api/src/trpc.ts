@@ -1,6 +1,5 @@
 import { initTRPC, TRPCError } from '@trpc/server';
 import superjson from 'superjson';
-import { ZodError } from 'zod'; // TODO
 
 import { type Session } from 'next-auth';
 import { headers } from 'next/headers';
@@ -37,17 +36,19 @@ export type TRPCContext = ReturnOf<typeof createTRPCContext> & {
  * 2. INITIALIZATION
  *
  * This is where the tRPC API is initialized, connecting the context and transformer. We also parse
- * ZodErrors so that you get typesafety on the frontend if your procedure fails due to validation
+ * type errors so that you get typesafety on the frontend if your procedure fails due to validation
  * errors on the backend.
  */
 const t = initTRPC.context<TRPCContext>().create({
   transformer: superjson,
   errorFormatter({ shape, error }) {
+    const cause = error.cause instanceof AggregateError ? error.cause.errors[0] : error.cause;
     return {
       ...shape,
+      message: cause.message,
       data: {
         ...shape.data,
-        zodError: error.cause instanceof ZodError ? error.cause.flatten() : null,
+        cause,
       },
     };
   },

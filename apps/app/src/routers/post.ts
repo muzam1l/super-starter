@@ -4,11 +4,13 @@ import {
   protectedProcedure,
   publicProcedure,
 } from '@{workspace}/api/trpc';
-import { z } from 'zod';
+
+import { Type } from '@sinclair/typebox';
+import { wrap } from '@typeschema/typebox';
 
 export const postRouter = createTRPCRouter({
   hello: publicProcedure
-    .input(z.object({ text: z.string() }))
+    .input(wrap(Type.Object({ text: Type.String() })))
     .query(async ({ input: { text } }) => {
       return {
         greeting: `Hello ${text}`,
@@ -16,7 +18,13 @@ export const postRouter = createTRPCRouter({
     }),
 
   create: protectedProcedure
-    .input(z.object({ name: z.string().min(1) }))
+    .input(
+      wrap(
+        Type.Object({
+          name: Type.String({ minLength: 1 }),
+        }),
+      ),
+    )
     .mutation(async ({ ctx, input }) => {
       await ctx.db.insert(posts).values({
         name: input.name,
