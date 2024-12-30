@@ -90,32 +90,6 @@ const procedure = t.procedure.use(async ({ ctx, next }) => {
   return next({ ctx });
 });
 
-// export const publicServerAction = procedure.experimental_caller(
-//   experimental_nextAppDirCaller({
-//     pathExtractor: ({ meta }) => (meta as Meta)?.span,
-//     createContext: createTRPCContext,
-//   }),
-// );
-
-// export const protectedServerAction = publicServerAction.use(async ({ ctx, next }) => {
-//   // Get auth session only for protected routes.
-//   // This makes public routes faster, but have to manually use `getAuthSession` to get the session.
-//   const session = await getAuthSession();
-
-//   if (!session?.user) {
-//     throw new TRPCError({
-//       code: 'UNAUTHORIZED',
-//     });
-//   }
-
-//   return next({
-//     ctx: {
-//       ...ctx,
-//       session, // <-- ensures type is non-nullable
-//     },
-//   });
-// });
-
 /**
  * Public (unauthenticated) procedure
  */

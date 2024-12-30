@@ -5,13 +5,15 @@ import { useState } from 'react';
 
 import { Button } from '@{workspace}/ui';
 import { api } from '@/app/api/trpc/client';
+import { hello } from '../api/trpc/actions';
 
 export function CreatePost() {
   const router = useRouter();
   const [name, setName] = useState('');
 
   const { isPending, error, mutate } = api.post.create.useMutation({
-    onSuccess: () => {
+    onSuccess: async () => {
+      alert((await hello('You did it!')).greeting);
       router.refresh();
       setName('');
     },
