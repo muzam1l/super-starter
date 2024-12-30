@@ -3,24 +3,25 @@ import Link from 'next/link';
 import { CreatePost } from '@/app/comps/create-post';
 import { Button } from '@{workspace}/ui';
 import { Suspense } from 'react';
-import { api } from '@/app/api/server';
+import { api, HydrateClient } from '@/app/api/trpc/server';
 import { getAuthSession } from '@{workspace}/auth';
+import { PrefetchedGreeting } from './comps/prefetched-greeting';
 
 export default async function Home() {
   console.time('Home');
-  const { greeting } = await api.post.hello({ text: 'from tRPC' });
+  api.post.hello.prefetch({ text: 'from tRPC' });
   console.timeEnd('Home');
 
   return (
-    <>
-      <div className="flex flex-col items-start gap-4 p-2">
-        <h1>{greeting}</h1>
+    <div className="flex flex-col items-start gap-4 p-2">
+      <HydrateClient>
+        <PrefetchedGreeting />
+      </HydrateClient>
 
-        <Suspense fallback="Loading auth info...">
-          <AuthShowcase />
-        </Suspense>
-      </div>
-    </>
+      <Suspense fallback="Loading auth info...">
+        <AuthShowcase />
+      </Suspense>
+    </div>
   );
 }
 async function AuthShowcase() {

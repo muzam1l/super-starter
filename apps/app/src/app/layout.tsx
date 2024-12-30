@@ -2,7 +2,7 @@ import type { PropsWithChildren } from 'react';
 import { Document } from '@{workspace}/ui';
 
 import '@{workspace}/ui/globals.css';
-import { Provider } from '@/app/api/client';
+import { TRPCProvider } from '@/app/api/trpc/client';
 
 export const metadata = {
   title: 'Create T3 App',
@@ -13,7 +13,7 @@ export const metadata = {
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <Document>
-      <Provider>{children}</Provider>
+      <TRPCProvider>{children}</TRPCProvider>
     </Document>
   );
 }

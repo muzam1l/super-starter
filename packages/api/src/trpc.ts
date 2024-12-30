@@ -1,8 +1,7 @@
 import { initTRPC, TRPCError } from '@trpc/server';
-import superjson from 'superjson';
 
 import { type Session } from 'next-auth';
-import { headers } from 'next/headers';
+import { headers as getHeaders } from 'next/headers';
 import { type ReturnOf } from '@{workspace}/utils/types';
 import { getAuthSession } from '@{workspace}/auth';
 import { db } from './db';
@@ -32,6 +31,10 @@ export type TRPCContext = ReturnOf<typeof createTRPCContext> & {
   session?: Session;
 };
 
+// type Meta = {
+//   span: string;
+// };
+
 /**
  * 2. INITIALIZATION
  *
@@ -39,20 +42,23 @@ export type TRPCContext = ReturnOf<typeof createTRPCContext> & {
  * type errors so that you get typesafety on the frontend if your procedure fails due to validation
  * errors on the backend.
  */
-const t = initTRPC.context<TRPCContext>().create({
-  transformer: superjson,
-  errorFormatter({ shape, error }) {
-    const cause = error.cause instanceof AggregateError ? error.cause.errors[0] : error.cause;
-    return {
-      ...shape,
-      message: cause.message,
-      data: {
-        ...shape.data,
-        cause,
-      },
-    };
-  },
-});
+const t = initTRPC
+  .context<TRPCContext>()
+  // .meta<Meta>()
+  .create({
+    // transformer: superjson,
+    errorFormatter({ shape, error }) {
+      const cause = error.cause instanceof AggregateError ? error.cause.errors[0] : error.cause;
+      return {
+        ...shape,
+        message: cause.message,
+        data: {
+          ...shape.data,
+          cause,
+        },
+      };
+    },
+  });
 
 /**
  * Create a server-side caller.
@@ -84,6 +90,32 @@ const procedure = t.procedure.use(async ({ ctx, next }) => {
   return next({ ctx });
 });
 
+// export const publicServerAction = procedure.experimental_caller(
+//   experimental_nextAppDirCaller({
+//     pathExtractor: ({ meta }) => (meta as Meta)?.span,
+//     createContext: createTRPCContext,
+//   }),
+// );
+
+// export const protectedServerAction = publicServerAction.use(async ({ ctx, next }) => {
+//   // Get auth session only for protected routes.
+//   // This makes public routes faster, but have to manually use `getAuthSession` to get the session.
+//   const session = await getAuthSession();
+
+//   if (!session?.user) {
+//     throw new TRPCError({
+//       code: 'UNAUTHORIZED',
+//     });
+//   }
+
+//   return next({
+//     ctx: {
+//       ...ctx,
+//       session, // <-- ensures type is non-nullable
+//     },
+//   });
+// });
+
 /**
  * Public (unauthenticated) procedure
  */
@@ -114,11 +146,11 @@ export const protectedProcedure = procedure.use(async ({ ctx, next }) => {
  * handling a tRPC call from a React Server Component.
  */
 export const createRSCContext = cache(() => {
-  const heads = new Headers(headers());
-  heads.set('x-trpc-source', 'rsc');
+  const headers = new Headers(getHeaders());
+  headers.set('x-trpc-source', 'rsc');
 
   return createTRPCContext({
-    headers: heads,
+    headers,
   });
 });
 

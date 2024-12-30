@@ -1,9 +1,5 @@
 import { posts } from '@{workspace}/api/schema/app';
-import {
-  createTRPCRouter,
-  protectedProcedure,
-  publicProcedure,
-} from '@{workspace}/api/trpc';
+import { createTRPCRouter, protectedProcedure, publicProcedure } from '@{workspace}/api/trpc';
 
 import { Type } from '@sinclair/typebox';
 import { wrap } from '@typeschema/typebox';
