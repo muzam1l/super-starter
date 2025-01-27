@@ -4,20 +4,21 @@ import { CreatePost } from '@/app/comps/create-post';
 import { Button } from '@{workspace}/ui';
 import { Suspense } from 'react';
 import { api, HydrateClient } from '@/app/api/trpc/server';
-import { getAuthSession } from '@{workspace}/auth';
+import { auth } from '@{workspace}/auth';
 import { PrefetchedGreeting } from './comps/prefetched-greeting';
 
 export default async function Home() {
-  console.time('Home');
-  api.post.hello.prefetch({ text: 'from tRPC' });
-  console.timeEnd('Home');
+  performance.mark('h');
+  api.post.hello.prefetch({ text: 'from hydrated tRPC ' });
+  const { greeting } = await api.post.hello({ text: 'from server tRPC' });
+  console.log(performance.measure('h1', 'h'));
 
   return (
     <div className="flex flex-col items-start gap-4 p-2">
+      {greeting}
       <HydrateClient>
         <PrefetchedGreeting />
       </HydrateClient>
-
       <Suspense fallback="Loading auth info...">
         <AuthShowcase />
       </Suspense>
@@ -25,9 +26,9 @@ export default async function Home() {
   );
 }
 async function AuthShowcase() {
-  console.time('AuthShowcase');
-  const session = await getAuthSession();
-  console.timeEnd('AuthShowcase');
+  performance.mark('1');
+  const session = await auth();
+  console.log('session1', performance.measure('m1', '1'));
 
   return (
     <>
@@ -47,18 +48,15 @@ async function AuthShowcase() {
 }
 
 async function CrudShowcase() {
-  console.time('CrudShowcase');
-
-  const session = await getAuthSession();
+  performance.mark('2');
+  const session = await auth();
+  console.log('session1', performance.measure('m2', '2'));
   if (!session?.user) {
-    console.timeEnd('CrudShowcase');
     return null;
   }
 
   const secret = await api.post.getSecretMessage();
   const latestPost = await api.post.getLatest();
-
-  console.timeEnd('CrudShowcase');
   return (
     <>
       <p>Secret: {secret}</p>

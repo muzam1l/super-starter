@@ -11,13 +11,10 @@
     "lint": "eslint . --max-warnings 0"
   },
   "dependencies": {
-    "@{workspace}/utils": "*",
-    "@{workspace}/api": "*",
-    "@auth/drizzle-adapter": "^0.8.2",
-    "drizzle-orm": "^0.30.10",
-    "next-auth": "^4.24.11",
-    "postgres": "^3.4.5",
     "@t3-oss/env-core": "^0.9.2",
-    "react": "18.2.0"
+    "@{workspace}/api": "*",
+    "@{workspace}/utils": "*",
+    "next-auth": "^5.0.0-beta.25",
+    "postgres": "^3.4.5"
   }
 }

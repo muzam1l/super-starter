@@ -10,26 +10,23 @@
   "scripts": {
     "lint": "eslint . --max-warnings 0",
     "clean": "rm -rf .turbo node_modules dist",
-    "prod": "tailwindcss -i ./src/globals.css -o ./dist/styles.css",
+    "prod": "bun x @tailwindcss/cli -i ./src/globals.css -o ./dist/styles.css",
     "dev": "bun run prod -- --watch"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.1.1"
   },
   "devDependencies": {
+    "@tailwindcss/cli": "^4.0.0",
+    "@tailwindcss/postcss": "^4.0.0",
     "@{workspace}/eslint-config": "*",
     "@{workspace}/ts-config": "*",
-    "@types/node": "^20.17.10",
-    "@types/react": "^18.3.18",
-    "@types/react-dom": "^18.3.5",
-    "react": "^18.3.1",
-    "class-variance-authority": "^0.7.1",
-    "tailwind-merge": "^2.6.0",
-    "clsx": "^2.1.1",
-    "postcss": "^8.4.49",
-    "typescript": "^5.7.2",
     "autoprefixer": "^10.4.20",
-    "tailwindcss": "^3.4.17",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "postcss": "^8.5.1",
+    "tailwind-merge": "^2.6.0",
+    "tailwindcss": "^4.0.0",
     "tailwindcss-animate": "^1.0.7"
   }
 }

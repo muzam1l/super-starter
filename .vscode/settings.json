@@ -6,5 +6,9 @@
   ],
   "editor.tabSize": 2,
   "editor.indentSize": "tabSize",
-  "cSpell.words": ["shadcn", "superjson"]
+  "cSpell.words": [
+    "shadcn",
+    "superjson"
+  ],
+  "editor.detectIndentation": true
 }

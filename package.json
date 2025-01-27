@@ -13,12 +13,16 @@
     "check": "bun run format && bun run lint"
   },
   "devDependencies": {
+    "@types/node": "^22.10.10",
+    "@types/react": "^19.0.8",
+    "@types/react-dom": "^19.0.3",
     "@{workspace}/eslint-config": "*",
     "@{workspace}/ts-config": "*",
     "drizzle-kit": "latest",
+    "eslint-plugin-drizzle": "^0.2.3",
     "prettier": "^3.4.2",
     "turbo": "latest",
-    "typescript": "^5.7.2"
+    "typescript": "^5.7.3"
   },
   "engines": {
     "node": ">=18"
@@ -32,8 +36,13 @@
     "es5-ext"
   ],
   "dependencies": {
+    "@auth/drizzle-adapter": "^1.7.4",
     "@sinclair/typebox": "^0.34.13",
     "@typeschema/typebox": "^0.14.0",
+    "drizzle-orm": "^0.38.4",
+    "next": "^15.1.6",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "zod": "^3.24.1"
   }
 }

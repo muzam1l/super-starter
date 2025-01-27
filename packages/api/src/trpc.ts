@@ -3,11 +3,10 @@ import { initTRPC, TRPCError } from '@trpc/server';
 import { type Session } from 'next-auth';
 import { headers as getHeaders } from 'next/headers';
 import { type ReturnOf } from '@{workspace}/utils/types';
-import { getAuthSession } from '@{workspace}/auth';
+import { auth } from '@{workspace}/auth';
 import { db } from './db';
 import { cache } from 'react';
 import type { NextRequest } from 'next/server';
-
 /**
  * 1. CONTEXT
  *
@@ -101,7 +100,7 @@ export const publicProcedure = procedure;
 export const protectedProcedure = procedure.use(async ({ ctx, next }) => {
   // Get auth session only for protected routes.
   // This makes public routes faster, but have to manually use `getAuthSession` to get the session.
-  const session = await getAuthSession();
+  const session = await auth();
 
   if (!session?.user) {
     throw new TRPCError({ code: 'UNAUTHORIZED' });
@@ -119,8 +118,8 @@ export const protectedProcedure = procedure.use(async ({ ctx, next }) => {
  * This wraps the `createTRPCContext` helper and provides the required context for the tRPC API when
  * handling a tRPC call from a React Server Component.
  */
-export const createRSCContext = cache(() => {
-  const headers = new Headers(getHeaders());
+export const createRSCContext = cache(async () => {
+  const headers = new Headers(await getHeaders());
   headers.set('x-trpc-source', 'rsc');
 
   return createTRPCContext({

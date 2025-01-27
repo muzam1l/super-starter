@@ -11,28 +11,21 @@
   "scripts": {
     "dev": "bun db:studio",
     "db:studio": "drizzle-kit studio",
-    "db:push": "drizzle-kit push:pg",
-    "db:generate": "drizzle-kit generate:pg",
+    "db:push": "drizzle-kit push",
+    "db:generate": "drizzle-kit generate",
     "clean": "rm -rf .turbo node_modules",
     "lint": "eslint . --max-warnings 0"
   },
   "dependencies": {
-    "@{workspace}/utils": "*",
-    "@auth/drizzle-adapter": "^0.8.2",
-    "next-auth": "^4.24.11",
-    "postgres": "^3.4.5",
     "@t3-oss/env-core": "^0.9.2",
-    "react": "18.2.0",
     "@trpc/client": "next",
-    "@trpc/server": "next",
     "@trpc/react-query": "next",
-    "drizzle-orm": "^0.30.10",
-    "superjson": "^2.2.2",
-    "next": "^14.2.22"
+    "@trpc/server": "next",
+    "@{workspace}/utils": "*",
+    "postgres": "^3.4.5",
+    "superjson": "^2.2.2"
   },
   "devDependencies": {
-    "eslint-plugin-drizzle": "^0.2.3",
-    "pg": "^8.13.1",
-    "drizzle-kit": "^0.20.18"
+    "pg": "^8.13.1"
   }
 }

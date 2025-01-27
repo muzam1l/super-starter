@@ -2,5 +2,5 @@
 
 module.exports = {
   root: true,
-  extends: [require.resolve("@{workspace}/eslint-config/base")],
+  extends: [require.resolve('@{workspace}/eslint-config/react')],
 };

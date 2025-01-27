@@ -1,14 +1,13 @@
 import { DrizzleAdapter } from '@auth/drizzle-adapter';
-import { getServerSession, type DefaultSession, type NextAuthOptions } from 'next-auth';
-import type { Adapter } from 'next-auth/adapters';
+import NextAuth, { type DefaultSession, type NextAuthResult } from 'next-auth';
 import DiscordProvider from 'next-auth/providers/discord';
 import GitHubProvider from 'next-auth/providers/github';
 
 import { env } from './env';
-import { cache } from 'react';
 
 import { db } from '@{workspace}/api/db';
-import { pgAuthTable } from '@{workspace}/api/schema/auth';
+import * as authSchema from '@{workspace}/api/schema/auth';
+import { cache } from 'react';
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -24,33 +23,9 @@ declare module 'next-auth' {
       // role: UserRole;
     } & DefaultSession['user'];
   }
-
-  // interface User {
-  //   // ...other properties
-  //   // role: UserRole;
-  // }
 }
 
-/**
- * Options for NextAuth.js used to configure adapters, providers, callbacks, etc.
- *
- * @see https://next-auth.js.org/configuration/options
- */
-export const authOptions: NextAuthOptions = {
-  callbacks: {
-    session: ({ session, token }) => {
-      console.log({ session });
-      return {
-        ...session,
-        user: {
-          ...session.user,
-          id: token.sub,
-        },
-      };
-    },
-  },
-  adapter: DrizzleAdapter(db, pgAuthTable) as Adapter,
-  session: { strategy: 'jwt' },
+export const { handlers, auth: _auth }: NextAuthResult = NextAuth({
   providers: [
     GitHubProvider({
       allowDangerousEmailAccountLinking: true,
@@ -70,12 +45,14 @@ export const authOptions: NextAuthOptions = {
      * @see https://next-auth.js.org/providers
      */
   ],
-};
+  session: { strategy: 'database' },
+  adapter: DrizzleAdapter(db, {
+    usersTable: authSchema.users,
+    accountsTable: authSchema.accounts,
+    sessionsTable: authSchema.sessions,
+    verificationTokensTable: authSchema.verificationTokens,
+    authenticatorsTable: authSchema.authenticators,
+  }),
+});
 
-/**
- * Wrapper for `getServerSession` so that you don't need to import the `authOptions` in every file.
- *
- * @see https://next-auth.js.org/configuration/nextjs
- */
-
-export const getAuthSession = cache(() => getServerSession(authOptions));
+export const auth = cache(_auth);

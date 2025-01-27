@@ -1,4 +1,6 @@
 import { defaultShouldDehydrateQuery, QueryClient } from '@tanstack/react-query';
+import { __SERVER__ } from '@{workspace}/utils/helpers';
+import { cache } from 'react';
 
 export function makeQueryClient() {
   return new QueryClient({
@@ -26,9 +28,10 @@ export function makeQueryClient() {
 
 let clientQueryClientSingleton: QueryClient | undefined = undefined;
 export const getQueryClient = () => {
-  if (typeof window === 'undefined') {
-    // Server: always make a new query client
-    return makeQueryClient();
+  if (__SERVER__) {
+    // Server: Create a stable getter for the query client that
+    //    will return the same client during the same request.
+    return cache(makeQueryClient)();
   }
   // Browser: use singleton pattern to keep the same query client
   return (clientQueryClientSingleton ??= makeQueryClient());
