@@ -1,4 +1,4 @@
-# [Turborepo](https://turbo.build/repo) | [TRPC](https://trpc.io/) | [Drizzle/Postgres](https://orm.drizzle.team/) | [NextAuth](https://next-auth.js.org/) | [shadcn/ui](https://ui.shadcn.com/) | [T3 App](https://create.t3.gg/) | [Bun](https://bun.sh/).
+# [Turborepo](https://turbo.build/repo) | [TRPC](https://trpc.io/) | [Drizzle/Postgres](https://orm.drizzle.team/) | [NextAuth](https://authjs.dev/getting-started) | [shadcn/ui](https://ui.shadcn.com/) | [T3 App](https://create.t3.gg/) | [Bun](https://bun.sh/).
 
 ## First things first
 
@@ -6,11 +6,11 @@
 
 - Setup postgres (`DATABASE_URL`). [Neon](https://neon.tech/) preferred for easy setup or run [local script](./packages/api/start-database.sh) for docker.
 
-- Setup [NextAuth](https://next-auth.js.org/configuration/options) (`NEXTAUTH_SECRET`, `NEXTAUTH_URL`), [Discord Provider](https://next-auth.js.org/providers/discord) (`DISCORD_CLIENT_ID`, `DISCORD_CLIENT_SECRET`) and [GitHub Provider](https://next-auth.js.org/providers/github) (`GITHUB_CLIENT_ID`, `GITHUB_CLIENT_SECRET`).
+- Setup [NextAuth](https://authjs.dev/getting-started/deployment) (`AUTH_SECRET`), [Discord Provider](https://next-auth.js.org/providers/discord) (`AUTH_DISCORD_ID`, `AUTH_DISCORD_SECRET`) and [GitHub Provider](https://next-auth.js.org/providers/github) (`AUTH_GITHUB_ID`, `AUTH_GITHUB_SECRET`).
 
 - [Install bun](https://bun.sh/docs/installation) and `bun i` to install deps.
 
-- `bun db:push` to push schema to db without migrations bullshit.
+- `bun db:push` to push schema to db without migrations.
 
 - `bun dev` to start the local dev setup.
 

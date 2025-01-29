@@ -29,13 +29,13 @@ export const { handlers, auth: _auth }: NextAuthResult = NextAuth({
   providers: [
     GitHubProvider({
       allowDangerousEmailAccountLinking: true,
-      clientId: env.GITHUB_CLIENT_ID,
-      clientSecret: env.GITHUB_CLIENT_SECRET,
+      clientId: env.AUTH_GITHUB_ID,
+      clientSecret: env.AUTH_GITHUB_SECRET,
     }),
     DiscordProvider({
       allowDangerousEmailAccountLinking: true,
-      clientId: env.DISCORD_CLIENT_ID,
-      clientSecret: env.DISCORD_CLIENT_SECRET,
+      clientId: env.AUTH_DISCORD_ID,
+      clientSecret: env.AUTH_DISCORD_SECRET,
     }),
     /**
      * ! Note: allowDangerousEmailAccountLinking is set case by case basis only.

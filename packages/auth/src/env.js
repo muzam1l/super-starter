@@ -8,10 +8,10 @@ export const env = createEnv({
    * isn't built with invalid env vars.
    */
   server: {
-    DISCORD_CLIENT_ID: z.string(),
-    DISCORD_CLIENT_SECRET: z.string(),
-    GITHUB_CLIENT_ID: z.string(),
-    GITHUB_CLIENT_SECRET: z.string(),
+    AUTH_DISCORD_ID: z.string(),
+    AUTH_DISCORD_SECRET: z.string(),
+    AUTH_GITHUB_ID: z.string(),
+    AUTH_GITHUB_SECRET: z.string(),
   },
 
   /**
@@ -28,10 +28,10 @@ export const env = createEnv({
    * middlewares) or client-side so we need to destruct manually.
    */
   runtimeEnv: {
-    DISCORD_CLIENT_ID: process.env.DISCORD_CLIENT_ID,
-    DISCORD_CLIENT_SECRET: process.env.DISCORD_CLIENT_SECRET,
-    GITHUB_CLIENT_ID: process.env.GITHUB_CLIENT_ID,
-    GITHUB_CLIENT_SECRET: process.env.GITHUB_CLIENT_SECRET,
+    AUTH_DISCORD_ID: process.env.AUTH_DISCORD_ID,
+    AUTH_DISCORD_SECRET: process.env.AUTH_DISCORD_SECRET,
+    AUTH_GITHUB_ID: process.env.AUTH_GITHUB_ID,
+    AUTH_GITHUB_SECRET: process.env.AUTH_GITHUB_SECRET,
   },
   /**
    * Makes it so that empty strings are treated as undefined. `SOME_VAR: z.string()` and

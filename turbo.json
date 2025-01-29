@@ -1,31 +1,41 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "globalDependencies": ["**/.env.*local"],
+  "globalDependencies": [
+    "**/.env.*local"
+  ],
   "tasks": {
     "prod": {
-      "dependsOn": ["^prod"],
-      "outputs": [".next/**", "!.next/cache/**"]
+      "dependsOn": [
+        "^prod"
+      ],
+      "outputs": [
+        ".next/**",
+        "!.next/cache/**"
+      ]
     },
     "lint": {
-      "dependsOn": ["^lint"]
+      "dependsOn": [
+        "^lint"
+      ]
     },
     "dev": {
       "cache": false,
       "persistent": true
     },
     "clean": {
-      "dependsOn": ["^clean"]
+      "dependsOn": [
+        "^clean"
+      ]
     }
   },
   "globalEnv": [
     "DATABASE_URL",
     "NODE_ENV",
-    "NEXTAUTH_SECRET",
-    "NEXTAUTH_URL",
-    "DISCORD_CLIENT_ID",
-    "DISCORD_CLIENT_SECRET",
-    "GITHUB_CLIENT_ID",
-    "GITHUB_CLIENT_SECRET",
+    "AUTH_SECRET",
+    "AUTH_DISCORD_ID",
+    "AUTH_DISCORD_SECRET",
+    "AUTH_GITHUB_ID",
+    "AUTH_GITHUB_SECRET",
     "VERCEL_URL",
     "PORT",
     "VERCEL",
