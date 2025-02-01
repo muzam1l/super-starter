@@ -13,6 +13,7 @@
     "check": "bun run format && bun run lint"
   },
   "devDependencies": {
+    "@types/bun": "^1.2.1",
     "@types/node": "^22.10.10",
     "@types/react": "^19.0.8",
     "@types/react-dom": "^19.0.3",
