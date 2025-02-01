@@ -2,7 +2,7 @@
 
 ## First things first
 
-- Change name `{workspace}` to your repo project name and `{app}` to your app name.
+- Change workspace and first app name: `bun scripts/rename -w your-workspace-name -a your-app-name`. Make sure everything is correct and commit the changes.
 
 - Setup postgres (`DATABASE_URL`). [Neon](https://neon.tech/) preferred for easy setup or run [local script](./packages/api/start-database.sh) for docker.
 
