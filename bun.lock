@@ -26,7 +26,7 @@
         "typescript": "^5.7.3",
       },
     },
-    "apps/app": {
+    "apps/{app}": {
       "name": "@{workspace}/{app}",
       "version": "0.0.0",
       "dependencies": {
@@ -394,7 +394,7 @@
 
     "@{workspace}/utils": ["@{workspace}/utils@workspace:packages/utils"],
 
-    "@{workspace}/{app}": ["@{workspace}/{app}@workspace:apps/app"],
+    "@{workspace}/{app}": ["@{workspace}/{app}@workspace:apps/{app}"],
 
     "acorn": ["acorn@8.14.0", "", { "bin": { "acorn": "bin/acorn" } }, "sha512-cl669nCJTZBsL97OF4kUQm5g5hC2uihk0NxY3WENAC0TYdILVkAyHymAntgxGkl7K+t0cXIrH5siy5S4XkFycA=="],
 
