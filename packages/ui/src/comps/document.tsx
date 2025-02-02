@@ -1,4 +1,4 @@
-import { cn } from '../utils';
+import { cn } from '#lib/utils';
 import { Inter } from 'next/font/google';
 import type { FC, PropsWithChildren } from 'react';
 
