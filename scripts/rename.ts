@@ -20,7 +20,7 @@ const replaceFilePlaceholders = async (file: string, replacements: Replacements)
   return fs.writeFile(file, content, 'utf-8');
 };
 
-const ignoredDirs = ['.git'];
+const ignoredDirs = ['.git', 'node_modules'];
 
 const replaceDirPlaceholders = async (dir: string, replacements: Replacements) => {
   if (ignoredDirs.includes(path.basename(dir))) {
