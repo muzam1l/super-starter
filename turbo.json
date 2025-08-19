@@ -4,9 +4,9 @@
     "**/.env.*local"
   ],
   "tasks": {
-    "prod": {
+    "build": {
       "dependsOn": [
-        "^prod"
+        "^build"
       ],
       "outputs": [
         ".next/**",
@@ -39,6 +39,7 @@
     "VERCEL_URL",
     "PORT",
     "VERCEL",
-    "SKIP_ENV_VALIDATION"
+    "SKIP_ENV_VALIDATION",
+    "AUTH_TRUST_HOST"
   ]
 }

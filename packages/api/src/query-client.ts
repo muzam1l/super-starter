@@ -9,8 +9,6 @@ export function makeQueryClient() {
         staleTime: 30 * 1000,
       },
       dehydrate: {
-        // serializeData: superjson.serialize,
-
         // This is a function that determines whether a query should be dehydrated or not.
         // Since the RSC transport protocol supports hydrating promises over the network,
         // we extend the defaultShouldDehydrateQuery function to also include queries that are still pending.
@@ -18,9 +16,6 @@ export function makeQueryClient() {
         // then consuming that promise in a client component further down.
         shouldDehydrateQuery: query =>
           defaultShouldDehydrateQuery(query) || query.state.status === 'pending',
-      },
-      hydrate: {
-        // deserializeData: superjson.deserialize,
       },
     },
   });

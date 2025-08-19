@@ -4,9 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "prod": "next build",
-    "dev": "next dev",
-    "start": "next start",
+    "build": "next build",
+    "dev": "next dev --turbo",
+    "start": "AUTH_TRUST_HOST=* next start",
     "lint": "eslint . --max-warnings 0",
     "clean": "rm -rf .turbo .next node_modules"
   },
@@ -19,8 +19,7 @@
     "server-only": "^0.0.1"
   },
   "devDependencies": {
-    "@{workspace}/config": "workspace:*",
-    "postcss": "^8.4.49"
+    "@{workspace}/config": "workspace:*"
   },
   "ct3aMetadata": {
     "initVersion": "7.30.0"

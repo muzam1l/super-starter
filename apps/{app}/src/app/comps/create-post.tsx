@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
-import { Button } from '@{workspace}/ui';
+import { Button } from '@{workspace}/ui/comps/button';
 import { api } from '@/app/api/trpc/client';
 import { hello } from '../api/trpc/actions';
 

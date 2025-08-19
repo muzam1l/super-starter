@@ -1,11 +1,12 @@
 import Link from 'next/link';
 
 import { CreatePost } from '@/app/comps/create-post';
-import { Button } from '@{workspace}/ui';
+import { Button } from '@{workspace}/ui/comps/button';
 import { Suspense } from 'react';
 import { api, HydrateClient } from '@/app/api/trpc/server';
 import { auth } from '@{workspace}/auth';
 import { PrefetchedGreeting } from './comps/prefetched-greeting';
+import { ThemeToggle } from '@{workspace}/ui/comps/theme/toggle';
 
 export default async function Home() {
   performance.mark('h');
@@ -19,6 +20,7 @@ export default async function Home() {
       <HydrateClient>
         <PrefetchedGreeting />
       </HydrateClient>
+      <ThemeToggle />
       <Suspense fallback="Loading auth info...">
         <AuthShowcase />
       </Suspense>

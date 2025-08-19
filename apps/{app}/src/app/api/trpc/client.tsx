@@ -21,7 +21,6 @@ export const TRPCProvider = (props: PropsWithChildren) => {
             (op.direction === 'down' && op.result instanceof Error),
         }),
         httpBatchStreamLink({
-          // transformer: superjson,
           url: getBaseUrl() + '/api/trpc',
           headers: () => ({
             'x-trpc-source': 'nextjs-react', // TODO confirm

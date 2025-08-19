@@ -2,7 +2,8 @@
   "extends": ["@{workspace}/config/ts/next"],
   "compilerOptions": {
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "#*": ["../../packages/ui/src/*"]
     }
   },
   "include": [

@@ -1,5 +1,5 @@
 import type { PropsWithChildren } from 'react';
-import { Document } from '@{workspace}/ui';
+import { Document } from '@{workspace}/ui/comps/document';
 
 import '@{workspace}/ui/globals.css';
 import { TRPCProvider } from '@/app/api/trpc/client';

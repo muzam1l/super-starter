@@ -2,7 +2,7 @@
   "name": "{workspace}",
   "private": true,
   "scripts": {
-    "prod": "bun run clean && bun run check && turbo prod",
+    "build": "bun run clean && bun run check && turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
     "db:generate": "bun --cwd packages/api db:generate",

@@ -45,7 +45,6 @@ const t = initTRPC
   .context<TRPCContext>()
   // .meta<Meta>()
   .create({
-    // transformer: superjson,
     errorFormatter({ shape, error }) {
       const cause: unknown =
         error.cause instanceof AggregateError ? error.cause.errors[0] : error.cause;
