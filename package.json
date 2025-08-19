@@ -2,7 +2,7 @@
   "name": "{workspace}",
   "private": true,
   "scripts": {
-    "prod": "bun run check && turbo prod",
+    "prod": "bun run clean && bun run check && turbo prod",
     "dev": "turbo dev",
     "lint": "turbo lint",
     "db:generate": "bun --cwd packages/api db:generate",
@@ -13,17 +13,16 @@
     "check": "bun run format && bun run lint"
   },
   "devDependencies": {
-    "@types/bun": "^1.2.1",
-    "@types/node": "^22.10.10",
-    "@types/react": "^19.0.8",
-    "@types/react-dom": "^19.0.3",
-    "@{workspace}/eslint-config": "*",
-    "@{workspace}/ts-config": "*",
+    "@types/bun": "^1.2.20",
+    "@types/node": "^24.3.0",
+    "@types/react": "^19.1.10",
+    "@types/react-dom": "^19.1.7",
+    "@{workspace}/config": "workspace:*",
     "drizzle-kit": "latest",
     "eslint-plugin-drizzle": "^0.2.3",
     "prettier": "^3.4.2",
-    "turbo": "latest",
-    "typescript": "^5.7.3"
+    "turbo": "^2.5.6",
+    "typescript": "^5.9.2"
   },
   "engines": {
     "node": ">=18"
@@ -41,9 +40,9 @@
     "@sinclair/typebox": "^0.34.13",
     "@typeschema/typebox": "^0.14.0",
     "drizzle-orm": "^0.38.4",
-    "next": "^15.1.6",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "next": "^15.4.7",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
     "zod": "^3.24.1"
   }
 }

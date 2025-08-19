@@ -1,5 +1,5 @@
 {
-  "extends": "@{workspace}/ts-config/react",
-  "include": [".", ".eslintrc.cjs"],
+  "extends": "@{workspace}/config/ts/react",
+  "include": ["."],
   "exclude": ["node_modules", "dist"]
 }

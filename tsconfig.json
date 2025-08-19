@@ -1,5 +1,5 @@
 {
-  "extends": ["@{workspace}/ts-config/base"],
+  "extends": ["@{workspace}/config/ts/base"],
   "compilerOptions": {
     "noEmit": true
   }

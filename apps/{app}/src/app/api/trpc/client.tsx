@@ -2,7 +2,7 @@
 
 import type { AppRouter } from '@/routers/root';
 import { createTRPCReact } from '@trpc/react-query';
-import { loggerLink, unstable_httpBatchStreamLink } from '@trpc/client';
+import { loggerLink, httpBatchStreamLink } from '@trpc/client';
 import { getQueryClient } from '@{workspace}/api/query-client';
 import { getBaseUrl } from '@{workspace}/utils/url';
 import { useState, type PropsWithChildren } from 'react';
@@ -20,7 +20,7 @@ export const TRPCProvider = (props: PropsWithChildren) => {
             process.env.NODE_ENV === 'development' ||
             (op.direction === 'down' && op.result instanceof Error),
         }),
-        unstable_httpBatchStreamLink({
+        httpBatchStreamLink({
           // transformer: superjson,
           url: getBaseUrl() + '/api/trpc',
           headers: () => ({

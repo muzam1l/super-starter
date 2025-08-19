@@ -21,7 +21,7 @@
     "@trpc/client": "next",
     "@trpc/react-query": "next",
     "@trpc/server": "next",
-    "@{workspace}/utils": "*",
+    "@{workspace}/utils": "workspace:*",
     "postgres": "^3.4.5",
     "superjson": "^2.2.2"
   },

@@ -1,6 +1,6 @@
 import 'server-only';
 
-import { appRouter, createCaller } from '@/routers/root';
+import { type appRouter, createCaller } from '@/routers/root';
 import { createRSCContext } from '@{workspace}/api/trpc';
 
 import { createHydrationHelpers } from '@trpc/react-query/rsc';

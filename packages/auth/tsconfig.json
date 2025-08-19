@@ -1,5 +1,5 @@
 {
-  "extends": "@{workspace}/ts-config/base",
-  "include": [".", ".eslintrc.cjs"],
+  "extends": "@{workspace}/config/ts/base",
+  "include": [".", "eslint.config.js"],
   "exclude": ["node_modules", "dist"]
 }

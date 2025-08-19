@@ -1,4 +1,4 @@
-import { bigserial, boolean, integer, primaryKey, serial, text, timestamp } from 'drizzle-orm/pg-core';
+import { bigserial, boolean, integer, primaryKey, text, timestamp } from 'drizzle-orm/pg-core';
 import type { AdapterAccountType } from '@auth/core/adapters';
 import { createTableFactory } from './helpers';
 
@@ -41,7 +41,7 @@ export const accounts = authTable(
 );
 
 export const sessions = authTable('session', {
-  id: bigserial({ mode: "number" }),
+  id: bigserial({ mode: 'number' }),
   sessionToken: text('sessionToken').primaryKey(),
   userId: text('userId')
     .notNull()

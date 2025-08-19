@@ -7,7 +7,7 @@ import { wrap } from '@typeschema/typebox';
 export const postRouter = createTRPCRouter({
   hello: publicProcedure
     .input(wrap(Type.Object({ text: Type.String() })))
-    .query(async ({ input: { text } }) => {
+    .query(({ input: { text } }) => {
       return {
         greeting: `Hello ${text}`,
       };

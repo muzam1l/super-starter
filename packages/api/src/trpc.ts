@@ -19,7 +19,7 @@ import type { NextRequest } from 'next/server';
  *
  * @see https://trpc.io/docs/server/context
  */
-export const createTRPCContext = async (opts: { headers: Headers }) => {
+export const createTRPCContext = (opts: { headers: Headers }) => {
   return {
     db,
     ...opts,
@@ -47,10 +47,12 @@ const t = initTRPC
   .create({
     // transformer: superjson,
     errorFormatter({ shape, error }) {
-      const cause = error.cause instanceof AggregateError ? error.cause.errors[0] : error.cause;
+      const cause: unknown =
+        error.cause instanceof AggregateError ? error.cause.errors[0] : error.cause;
       return {
         ...shape,
-        message: cause.message,
+        // eslint-disable-next-line
+        message: (cause as any)?.message,
         data: {
           ...shape.data,
           cause,
@@ -131,7 +133,7 @@ export const createRSCContext = cache(async () => {
  * This wraps the `createTRPCContext` helper and provides the required context for the tRPC API when
  * handling a HTTP request (e.g. when you make requests from Client Components).
  */
-export const createHTTPContext = async (req: NextRequest) => {
+export const createHTTPContext = (req: NextRequest) => {
   return createTRPCContext({
     headers: req.headers,
   });

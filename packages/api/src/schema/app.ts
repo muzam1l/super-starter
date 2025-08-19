@@ -1,4 +1,4 @@
-import { index, text, timestamp } from 'drizzle-orm/pg-core';
+import { index, text } from 'drizzle-orm/pg-core';
 import { createTableFactory } from './helpers';
 import { users } from './auth';
 

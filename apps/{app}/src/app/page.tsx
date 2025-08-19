@@ -9,7 +9,7 @@ import { PrefetchedGreeting } from './comps/prefetched-greeting';
 
 export default async function Home() {
   performance.mark('h');
-  api.post.hello.prefetch({ text: 'from hydrated tRPC ' });
+  await api.post.hello.prefetch({ text: 'from hydrated tRPC ' });
   const { greeting } = await api.post.hello({ text: 'from server tRPC' });
   console.log(performance.measure('h1', 'h'));
 
@@ -32,7 +32,7 @@ async function AuthShowcase() {
 
   return (
     <>
-      <p>{session && <span>Logged in as {session.user?.name}</span>}</p>
+      <p>{session && <span>Logged in as {session.user.name}</span>}</p>
 
       <Button variant="destructive">
         <Link className="block" href={session ? '/api/auth/signout' : '/api/auth/signin'}>

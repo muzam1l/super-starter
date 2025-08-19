@@ -6,7 +6,9 @@
     "esModuleInterop": true,
     "incremental": false,
     "isolatedModules": true,
-    "lib": ["ESNext"],
+    "lib": [
+      "ESNext"
+    ],
     "module": "ESNext",
     "moduleResolution": "Bundler",
     "moduleDetection": "force",
@@ -15,7 +17,7 @@
     "verbatimModuleSyntax": true,
     "skipLibCheck": true,
     "strict": true,
-    "target": "ES2020",
+    "target": "ES2021",
     "checkJs": true,
     "allowJs": true,
     "noEmit": true

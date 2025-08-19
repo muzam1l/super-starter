@@ -1,6 +1,6 @@
 {
-  "extends": "@{workspace}/ts-config/base",
-  "include": [".", ".eslintrc.cjs"],
+  "extends": "@{workspace}/config/ts/base",
+  "include": [".", "eslint.config.js"],
   "compilerOptions": {
     "jsx": "preserve"
   },

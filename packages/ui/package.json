@@ -5,6 +5,7 @@
   "type": "module",
   "exports": {
     ".": "./src/comps/index.ts",
+    "./tailwind-config": "./src/tailwind-config.ts",
     "./*": "./src/*"
   },
   "imports": {
@@ -20,8 +21,7 @@
     "@radix-ui/react-slot": "^1.1.1"
   },
   "devDependencies": {
-    "@{workspace}/eslint-config": "*",
-    "@{workspace}/ts-config": "*",
+    "@{workspace}/config": "workspace:*",
     "autoprefixer": "^10.4.20",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
