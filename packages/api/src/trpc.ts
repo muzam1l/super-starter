@@ -1,12 +1,11 @@
 import { initTRPC, TRPCError } from '@trpc/server';
 
-import { type Session } from 'next-auth';
-import { headers as getHeaders } from 'next/headers';
+import { headers as getNextHeaders } from 'next/headers';
 import { type ReturnOf } from '@{workspace}/utils/types';
-import { auth } from '@{workspace}/auth';
 import { db } from './db';
 import { cache } from 'react';
-import type { NextRequest } from 'next/server';
+import { auth } from './auth';
+import type { Session } from 'better-auth';
 /**
  * 1. CONTEXT
  *
@@ -48,7 +47,7 @@ const t = initTRPC
     errorFormatter({ shape, error }) {
       const cause: unknown =
         error.cause instanceof AggregateError ? error.cause.errors[0] : error.cause;
-      return {
+      return JSON.stringify({
         ...shape,
         // eslint-disable-next-line
         message: (cause as any)?.message,
@@ -56,9 +55,11 @@ const t = initTRPC
           ...shape.data,
           cause,
         },
-      };
+      });
     },
   });
+
+console.log('TRPC INIT');
 
 /**
  * Create a server-side caller.
@@ -99,9 +100,11 @@ export const publicProcedure = procedure;
  * Protected (authenticated) procedure
  */
 export const protectedProcedure = procedure.use(async ({ ctx, next }) => {
-  // Get auth session only for protected routes.
-  // This makes public routes faster, but have to manually use `getAuthSession` to get the session.
-  const session = await auth();
+  // Get auth session only for protected routes. Keeping public routes faster.
+
+  console.time('PROTECTED');
+  const session = await auth.api.getSession({ headers: ctx.headers });
+  console.timeEnd('PROTECTED');
 
   if (!session?.user) {
     throw new TRPCError({ code: 'UNAUTHORIZED' });
@@ -120,20 +123,18 @@ export const protectedProcedure = procedure.use(async ({ ctx, next }) => {
  * handling a tRPC call from a React Server Component.
  */
 export const createRSCContext = cache(async () => {
-  const headers = new Headers(await getHeaders());
+  const headers = new Headers(await getNextHeaders());
   headers.set('x-trpc-source', 'rsc');
 
-  return createTRPCContext({
-    headers,
-  });
+  return createTRPCContext({ headers });
 });
 
 /**
  * This wraps the `createTRPCContext` helper and provides the required context for the tRPC API when
  * handling a HTTP request (e.g. when you make requests from Client Components).
  */
-export const createHTTPContext = (req: NextRequest) => {
-  return createTRPCContext({
-    headers: req.headers,
-  });
+export const createHTTPContext = (headers: Headers) => {
+  headers.set('x-trpc-source', 'http');
+
+  return createTRPCContext({ headers });
 };

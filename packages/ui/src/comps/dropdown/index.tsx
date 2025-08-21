@@ -10,11 +10,11 @@ import {
 } from './primitive';
 
 interface DropdownProps extends React.ComponentProps<typeof DropdownMenuRoot> {
-  items: Array<{
+  items: {
     label: string;
     key?: string;
     onClick: () => void;
-  }>;
+  }[];
 }
 
 export const Dropdown: FC<PropsWithChildren<DropdownProps>> = ({ children, items, ...props }) => {

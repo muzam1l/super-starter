@@ -1,21 +1,17 @@
 import { index, text } from 'drizzle-orm/pg-core';
-import { createTableFactory } from './helpers';
-import { users } from './auth';
+import { tableFactory, commonColumns } from './helpers';
+import { user } from './auth';
 
-export const appTable = createTableFactory('app');
+export const appTable = tableFactory('app');
 
-export const posts = appTable(
+export const post = appTable(
   'post',
   {
-    name: text(),
-    createdById: text()
+    ...commonColumns,
+    title: text(),
+    userId: text()
       .notNull()
-      .references(() => users.id),
+      .references(() => user.id),
   },
-  example => [
-    {
-      createdByIdIdx: index().on(example.createdById),
-      nameIndex: index().on(example.name),
-    },
-  ],
+  table => [index().on(table.userId)],
 );

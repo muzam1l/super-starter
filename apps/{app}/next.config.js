@@ -9,7 +9,6 @@ const config = {
   transpilePackages: [
     '@{workspace}/ui',
     '@{workspace}/config',
-    '@{workspace}/auth',
     '@{workspace}/utils',
     '@{workspace}/api',
   ],

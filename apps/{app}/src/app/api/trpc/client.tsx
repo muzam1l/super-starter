@@ -3,7 +3,7 @@
 import type { AppRouter } from '@/routers/root';
 import { createTRPCReact } from '@trpc/react-query';
 import { loggerLink, httpBatchStreamLink } from '@trpc/client';
-import { getQueryClient } from '@{workspace}/api/query-client';
+import { getQueryClient } from '@{workspace}/api/client/query';
 import { getBaseUrl } from '@{workspace}/utils/url';
 import { useState, type PropsWithChildren } from 'react';
 import { QueryClientProvider } from '@tanstack/react-query';

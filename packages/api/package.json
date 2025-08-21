@@ -4,15 +4,15 @@
   "private": true,
   "type": "module",
   "exports": {
-    "./*": "./src/*.ts",
-    "./schema": "./src/schema/index.ts",
-    "./client": "./src/client/index.tsx"
+    "./*": "./src/*.ts"
   },
   "scripts": {
     "dev": "bun db:studio",
     "db:studio": "drizzle-kit studio",
     "db:push": "drizzle-kit push",
     "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "auth:schema:generate": "npx @better-auth/cli generate --output ./src/schema/auth.ts",
     "clean": "rm -rf .turbo node_modules",
     "lint": "eslint . --max-warnings 0"
   },

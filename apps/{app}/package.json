@@ -6,14 +6,13 @@
   "scripts": {
     "build": "next build",
     "dev": "next dev --turbo",
-    "start": "AUTH_TRUST_HOST=* next start",
+    "prod": "next start",
     "lint": "eslint . --max-warnings 0",
     "clean": "rm -rf .turbo .next node_modules"
   },
   "dependencies": {
     "@t3-oss/env-nextjs": "^0.9.2",
     "@{workspace}/api": "workspace:*",
-    "@{workspace}/auth": "workspace:*",
     "@{workspace}/ui": "workspace:*",
     "@{workspace}/utils": "workspace:*",
     "server-only": "^0.0.1"

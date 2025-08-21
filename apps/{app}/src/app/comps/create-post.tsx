@@ -5,17 +5,17 @@ import { useState } from 'react';
 
 import { Button } from '@{workspace}/ui/comps/button';
 import { api } from '@/app/api/trpc/client';
-import { hello } from '../api/trpc/actions';
+import { hello } from '../actions';
 
 export function CreatePost() {
   const router = useRouter();
-  const [name, setName] = useState('');
+  const [title, setTitle] = useState('');
 
   const { isPending, error, mutate } = api.post.create.useMutation({
     onSuccess: async () => {
-      alert((await hello('You did it!')).greeting);
+      alert(await hello('Message from server action:You did it!'));
       router.refresh();
-      setName('');
+      setTitle('');
     },
   });
 
@@ -24,10 +24,15 @@ export function CreatePost() {
       className="flex flex-col gap-2"
       onSubmit={e => {
         e.preventDefault();
-        mutate({ name });
+        mutate({ title });
       }}
     >
-      <input type="text" placeholder="Title" value={name} onChange={e => setName(e.target.value)} />
+      <input
+        type="text"
+        placeholder="Title"
+        value={title}
+        onChange={e => setTitle(e.target.value)}
+      />
       <Button type="submit" disabled={isPending}>
         {isPending ? 'Submitting...' : 'Submit'}
       </Button>

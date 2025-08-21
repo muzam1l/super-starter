@@ -17,6 +17,7 @@
     "verbatimModuleSyntax": true,
     "skipLibCheck": true,
     "strict": true,
+    "strictNullChecks": true,
     "target": "ES2021",
     "checkJs": true,
     "allowJs": true,

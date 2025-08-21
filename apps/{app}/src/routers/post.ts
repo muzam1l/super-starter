@@ -1,36 +1,28 @@
-import { posts } from '@{workspace}/api/schema/app';
+import { post } from '@{workspace}/api/schema/app';
 import { createTRPCRouter, protectedProcedure, publicProcedure } from '@{workspace}/api/trpc';
 
 import { Type } from '@sinclair/typebox';
 import { wrap } from '@typeschema/typebox';
 
 export const postRouter = createTRPCRouter({
-  hello: publicProcedure
-    .input(wrap(Type.Object({ text: Type.String() })))
-    .query(({ input: { text } }) => {
-      return {
-        greeting: `Hello ${text}`,
-      };
-    }),
-
   create: protectedProcedure
     .input(
       wrap(
         Type.Object({
-          name: Type.String({ minLength: 1 }),
+          title: Type.String({ minLength: 1 }),
         }),
       ),
     )
     .mutation(async ({ ctx, input }) => {
-      await ctx.db.insert(posts).values({
-        name: input.name,
-        createdById: ctx.session.user.id,
+      await ctx.db.insert(post).values({
+        title: input.title,
+        userId: ctx.session.user.id,
       });
     }),
 
   getLatest: publicProcedure.query(({ ctx }) => {
-    return ctx.db.query.posts.findFirst({
-      orderBy: (posts, { desc }) => [desc(posts.createdAt)],
+    return ctx.db.query.post.findFirst({
+      orderBy: (post, { desc }) => [desc(post.createdAt)],
     });
   }),
 
